@@ -14,6 +14,12 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
     ],
+    'controllerMap' => [
+         'back' => [
+                'class' => 'app\controllers\back\SiteController',
+                'enableCsrfValidation' => false,
+            ],
+    ],
     'components' => [
         'view' => [
             'theme' => [
@@ -24,6 +30,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'z0a2EoYFHTLuWyYf6aFjBBAuiMFjaEW3',
+            'enableCsrfValidation'=>false,
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -85,7 +92,7 @@ $config = [
             ],
             // format settings for saving each date attribute (PHP format example)
             'saveSettings' => [
-                Module::FORMAT_DATE => 'php:U', // saves as unix timestamp
+                Module::FORMAT_DATE => 'php:Y-m-d',
                 Module::FORMAT_TIME => 'php:H:i:s',
                 Module::FORMAT_DATETIME => 'php:Y-m-d H:i:s',
             ],
@@ -96,7 +103,7 @@ $config = [
             // automatically use kartik\widgets for each of the above formats
             'autoWidget' => true,
             // use ajax conversion for processing dates from display format to save format.
-            'ajaxConversion' => true,
+            'ajaxConversion' => false,
             // default settings for each widget from kartik\widgets used when autoWidget is true
             'autoWidgetSettings' => [
                 Module::FORMAT_DATE => ['type' => 2, 'pluginOptions' => ['autoclose' => true]], // example

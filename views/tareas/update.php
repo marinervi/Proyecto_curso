@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Tareas */
 
-$this->title = 'Update Tareas: {nameAttribute}';
+$this->title = 'Actualizar Tareas: ' . $model->nombre;
 $this->params['breadcrumbs'][] = ['label' => 'Tareas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_tarea, 'url' => ['view', 'id' => $model->id_tarea]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Modificar';
 ?>
 <div class="tareas-update">
 

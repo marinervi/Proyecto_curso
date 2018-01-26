@@ -79,6 +79,14 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
     public static function findByUsername($username) {
         return static::findOne(['username' => $username]);
     }
+    
+    public static function isAdmin(){
+        if(!Yii::$app->user->isGuest){
+            return Yii::$app->user->identity->admin;
+        }else{
+            return 0;
+        }
+    }
 
     /**
      * @inheritdoc

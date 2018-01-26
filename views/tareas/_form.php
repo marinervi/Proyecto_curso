@@ -21,16 +21,18 @@ use kartik\datecontrol\DateControl;
     <?= $form->field($model, 'categoria')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'prioridad')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'fecha_inicio')->widget(DateControl::classname(),[
-        'displayFormat' => 'dd-MM-yyyy',
-        'type'=>DateControl::FORMAT_DATE,
-    ]) ?>
-
-    <?= $form->field($model, 'fecha_fin')->widget(DateControl::classname(),[
-        'displayFormat' => 'dd-MM-yyyy',
-        'type'=>DateControl::FORMAT_DATE,
-    ]) ?>
+  
+    
+    <?= $form->field($model, 'fecha_inicio')->widget(Datecontrol::classname(),
+            ['type' => DateControl::FORMAT_DATE,
+            'language' => 'es',
+            ]); ?>
+   
+        
+    <?= $form->field($model, 'fecha_fin')->widget(Datecontrol::classname(),
+            ['type' => DateControl::FORMAT_DATE,
+            'language' => 'es',
+            ]); ?>
 
     <?= $form->field($model, 'propietario')->textInput(['maxlength' => true]) ?>
 

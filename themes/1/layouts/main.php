@@ -7,6 +7,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\widgets\Menu;
+use app\models\User;
 
 AppAsset::register($this);
 /**
@@ -68,19 +69,27 @@ AppAsset::register($this);
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Registro', 'url' => ['/site/registrar']],
+                ['label' => 'Contacto', 'url' => ['/site/contact']],
+                ['label' => 'Admin', 'items' => [
+                        ['label' => 'Gestionar Tareas de Usuarios',
+                            'url' => ['back/index']],
+                    ],
+            'visible' => User::isAdmin(),
+                ],
                 Yii::$app->user->isGuest ? (
                         ['label' => 'Login', 'url' => ['/site/login']]
                         ) : (
                         '<li>'
                         . Html::beginForm(['/site/logout'], 'post')
                         . Html::submitButton(
-                                'Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-link logout']
+                                'Logout (' . Yii::$app->user->identity->username . ')',
+                                ['class' => 'btn btn-link logout']
                         )
                         . Html::endForm()
                         . '</li>'
                         )
-            ],
-        ]);
+        ]]);
+
         NavBar::end();
         ?>
 
@@ -90,7 +99,7 @@ AppAsset::register($this);
             <div class="row">
                 <div class="box">
                     <div class="col-lg-12">
-                        <?php echo $content; ?>
+<?php echo $content; ?>
                     </div>
                 </div>
             </div>
@@ -151,14 +160,14 @@ AppAsset::register($this);
             </div>
         </footer>
 
-        <?php
-        $this->registerJs(
-                "$('.carousel').carousel({
-                interval: 3000
+<?php
+$this->registerJs(
+        "$('.carousel').carousel({
+                interval: 4000
             });"
-        );
-        ?>
+);
+?>
         <?php $this->endBody(); ?>
     </body>
 </html>
-<?php $this->endPage(); ?>
+        <?php $this->endPage(); ?>

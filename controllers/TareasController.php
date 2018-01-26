@@ -33,10 +33,10 @@ class TareasController extends Controller
      * Lists all Tareas models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($username)
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Tareas::find(),
+            'query' => Tareas::find()->where(['propietario' => $username]),
         ]);
 
         return $this->render('index', [
@@ -66,8 +66,9 @@ class TareasController extends Controller
     {
         $model = new Tareas();
 
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_tarea]);
+            return $this->redirect(['index', 'username' => $model->propietario]);
         }
 
         return $this->render('create', [
@@ -87,7 +88,7 @@ class TareasController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_tarea]);
+            return $this->redirect(['index', 'username' => $model->propietario]);
         }
 
         return $this->render('update', [
@@ -103,10 +104,11 @@ class TareasController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
+         
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'username'=>Yii::$app->user->identity->username]);
     }
 
     /**
